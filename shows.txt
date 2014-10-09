@@ -1,0 +1,34 @@
+Family Guy
+(?i)Family.Guy.S(\d+)E(\d+).+?720p
+13 2
+Drarbg eztv ettv
+
+The Simpsons
+(?i)The.Simpsons.S(\d+)E(\d+).+?720p
+26 2
+Drarbg eztv ettv
+
+Person of Interest
+(?i)person.of.interest.S(\d+)E(\d+).+?720p
+4 3
+Drarbg eztv ettv
+
+South Park
+(?i)South.Park.S(\d+)E(\d+).+?720p
+18 2
+Drarbg eztv ettv
+
+Last Week Tonight With John Oliver
+(?i)Last.Week.Tonight.With.John.Oliver.S(\d+)E(\d+).+?720p
+1 20
+Drarbg eztv ettv
+
+Homeland
+(?i)Homeland.S(\d+)E(\d+).+?720p
+4 2
+Drarbg eztv ettv
+
+Key and Peele
+(?i)Key.and.Peele.S(\d+)E(\d+).+?720p
+4 2
+Drarbg eztv ettv

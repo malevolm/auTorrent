@@ -1,3 +1,8 @@
+The Colbert Report
+(?i)The.Colbert.Report.2014.(\d+).(\d+)
+10 7
+Drarbg eztv ettv
+
 Family Guy
 (?i)Family.Guy.S(\d+)E(\d+).+?720p
 13 2

@@ -4,8 +4,8 @@ a minimal torrent autodownloader for tv shows. meant to be used with a torrent c
 
 auTorrent-tray
 ==============
-no console window, docks in system tray
-no interaction, click the tray icon once to close
+* no console window, docks in system tray
+* no interaction, click the tray icon once to close
 
 about
 ==========

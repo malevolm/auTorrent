@@ -1,7 +1,6 @@
 auTorrent
 =========
-
-meant to be used with a torrent client which watches your SAVE_PATH
+a simple, lightweight torrent autodownloader for tv shows. meant to be used with a torrent client which watches your SAVE_PATH, such as uTorrent
 
 about
 ==========

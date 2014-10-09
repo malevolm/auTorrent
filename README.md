@@ -8,6 +8,7 @@ about
 * sleep settings & save path for torrents in config.txt
 * download.log tracks your progression through tv series', deleting it will lead to duplicates!
 * only supported torrent search is thepiratebay.se, should suffice
+* changes in shows.txt and config.txt are reflected upon next iteration (no need to restart app)
 
 shows.txt
 =========

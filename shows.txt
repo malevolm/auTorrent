@@ -1,6 +1,11 @@
 The Colbert Report
 (?i)The.Colbert.Report.2014.(\d+).(\d+)
-10 7
+10 8
+Drarbg eztv ettv
+
+Conan
+(?i)Conan.2014.(\d+).(\d+)
+10 2
 Drarbg eztv ettv
 
 Family Guy
@@ -20,7 +25,7 @@ Drarbg eztv ettv
 
 South Park
 (?i)South.Park.S(\d+)E(\d+).+?720p
-18 2
+18 3
 Drarbg eztv ettv
 
 Last Week Tonight With John Oliver

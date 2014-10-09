@@ -21,15 +21,14 @@ func check(e error) {
     }
 }
 
-func main() {
-	loadConfig()
-	buildShowDB()
-	
-	sleep, _ := strconv.Atoi(config["SLEEP_SEC"])
-	
+func main() {	
 	fmt.Println("==auTorrent Initialised==")
 	
 	for i := 0; i > -1; i++ {
+		loadConfig()
+		buildShowDB()
+		sleep, _ := strconv.Atoi(config["SLEEP_SEC"])
+		
 		checkForNewTorrents()
 		fmt.Printf("(sleeping for %v sec)\n", sleep)
 		time.Sleep(time.Duration(sleep)*1000000000)
@@ -43,8 +42,7 @@ func checkForNewTorrents() {
 		for i := 0; i < len(res); i++ {
 			result := checkTorrentSuitability(res[i][0], res[i][1])
 			if result == 1 {
-				info := getSeasonInfo(res[i][0])
-
+				info := getSeasonInfo(res[i][0], show[1])
 				if checkIfDownloaded(show[0], info[0], info[1]) == false {
 					fmt.Printf("=> %s (by %s)\n", res[i][0], res[i][1])
 					downloadTorrent(res[i])
@@ -95,8 +93,8 @@ func checkTorrentSuitability(torrent string, author string) int {
 	return 0
 }
 
-func getSeasonInfo(torrent string) []string {
-	re := regexp.MustCompile("(?i)S([0-9]{1,2})E([0-9]{1,2})")
+func getSeasonInfo(torrent string, expr string) []string {
+	re := regexp.MustCompile(expr)
 	rs := re.FindAllStringSubmatch(torrent, -1)	
 	return []string{rs[0][1], rs[0][2]}
 }
@@ -166,12 +164,9 @@ func loadConfig() {
 	res, err := ioutil.ReadFile("config.txt");
 	check(err)
 	
-	fmt.Println("==LOADING CONFIG==")
-	
 	lines := strings.Split(string(res[:]), "\r\n")
 	for _, line := range lines {
 		info := strings.Split(line, "=")
-		fmt.Printf("Setting '%s' to '%s'\n", info[0], info[1])
 		config[info[0]] = info[1]
 	}
 }

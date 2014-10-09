@@ -166,11 +166,9 @@ func loadConfig() {
 	
 	lines := strings.Split(string(res[:]), "\r\n")
 	for _, line := range lines {
-		if line != "" {
+		if line != "" && string(line[0]) != "#" {
 			info := strings.Split(line, "=")
-			if string(line[0]) != "#" {
-				config[info[0]] = info[1]
-			}
+			config[info[0]] = info[1]
 		}
 	}
 }

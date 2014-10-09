@@ -1,6 +1,11 @@
-auTorrent
+auTorrent 0.1.0
 =========
-a simple, lightweight torrent autodownloader for tv shows. meant to be used with a torrent client which watches your SAVE_PATH, such as uTorrent
+a minimal torrent autodownloader for tv shows. meant to be used with a torrent client which watches a directory for new torrents, such as uTorrent
+
+auTorrent-tray
+==============
+no console window, docks in system tray
+no interaction, click the tray icon once to close
 
 about
 ==========

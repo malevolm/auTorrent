@@ -35,4 +35,4 @@ the fourth line is a whitelist for reputable torrent uploaders, separated by spa
 
 > *
 
-and that's it. each block should be separated by a newline (currently expects \r\n)
+and that's it. each block should be separated by a newline

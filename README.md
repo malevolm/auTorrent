@@ -2,6 +2,8 @@ auTorrent 0.1.0
 =========
 a minimal torrent autodownloader for tv shows. meant to be used with a torrent client which watches a directory for new torrents, such as uTorrent
 
+auTorrent is written to be platform independent, however you must make sure your shows.txt and config.txt contain the right type of newline for your system. on windows you must use CR+LF, on everything else its just LF. the files in this repo are CR+LF by default
+
 auTorrent-tray
 ==============
 * no console window, docks in system tray

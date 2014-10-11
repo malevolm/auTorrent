@@ -6,6 +6,9 @@ auTorrent-tray
 ==============
 * no console window, docks in system tray
 * no interaction, click the tray icon once to close
+* if building auTorrent-tray, use the following command
+ 
+> go build -ldflags -H=windowsgui auTorrent-tray.go
 
 about
 ==========

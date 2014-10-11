@@ -36,7 +36,7 @@ func main() {
 	go func() {
 		fmt.Println("==auTorrent Initialised==")
 		
-		for i := 0; i > -1; i++ {
+		for {
 			loadConfig()
 			buildShowDB()
 			sleep, _ := strconv.Atoi(config["SLEEP_SEC"])

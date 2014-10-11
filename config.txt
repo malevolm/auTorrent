@@ -1,4 +1,4 @@
 # where to save .torrent files
-SAVE_PATH=F:\watch\
+SAVE_PATH=C:\watch\
 # how long to wait between searches
 SLEEP_SEC=120

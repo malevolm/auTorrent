@@ -1,7 +1,7 @@
 package main
 
 import (
-    "os"
+	"os"
 	"fmt"
 	"time"
 	"regexp"
@@ -10,10 +10,12 @@ import (
 	"net/url"
 	"strings"
 	"strconv"
+	"runtime"
 )
 
 var shows [][]string
 var config = make(map[string]string)
+var sleep time.Duration
 
 func check(e error) {
     if e != nil {
@@ -22,16 +24,16 @@ func check(e error) {
 }
 
 func main() {	
+	getSysInfo()
 	fmt.Println("==auTorrent Initialised==")
 	
 	for {
 		loadConfig()
-		buildShowDB()
-		sleep, _ := strconv.Atoi(config["SLEEP_SEC"])
+		loadShowDB()
 		
 		checkForNewTorrents()
-		fmt.Printf("(sleeping for %v sec)\n", sleep)
-		time.Sleep(time.Duration(sleep)*1000000000)
+		fmt.Printf("(sleeping for %v)\n", sleep)
+		time.Sleep(sleep)
 	}
 }
 
@@ -110,7 +112,7 @@ func downloadTorrent(torrent_info []string) int {
 func checkIfDownloaded(show string, season string, episode string) bool {
 	res, err := ioutil.ReadFile("download.log");
 	check(err)
-	lines := strings.Split(string(res[:]), "\r\n")
+	lines := strings.Split(string(res[:]), config["newline"])
 	for _, line := range lines {
 		parts := strings.Split(line, "|")
 		if parts[0] == show && parts[1] == season && parts[2] == episode {
@@ -122,7 +124,7 @@ func checkIfDownloaded(show string, season string, episode string) bool {
 
 func markAsDownloaded(show string, season string, episode string) bool {
 	if checkIfDownloaded(show, season, episode) == false {
-		entry := fmt.Sprintf("%s|%s|%s\r\n", show, season, episode)
+		entry := fmt.Sprintf("%s|%s|%s%s", show, season, episode, config["newline"])
 		f, err := os.OpenFile("download.log", os.O_APPEND|os.O_WRONLY, 0600)
 		check(err)
 
@@ -160,28 +162,40 @@ func httpGet(url string) string {
 	return out
 }
 
+func getSysInfo() {
+	if runtime.GOOS == "windows" {
+		config["newline"] = "\r\n"
+	} else {
+		config["newline"] = "\n"
+	}
+}
+
 func loadConfig() {
 	res, err := ioutil.ReadFile("config.txt");
 	check(err)
 	
-	lines := strings.Split(string(res[:]), "\r\n")
+	lines := strings.Split(string(res[:]), config["newline"])
 	for _, line := range lines {
 		if line != "" && string(line[0]) != "#" {
 			info := strings.Split(line, "=")
 			config[info[0]] = info[1]
 		}
 	}
+	
+	s, _ := strconv.Atoi(config["SLEEP_SEC"])
+	sleep = time.Duration(s)*1000000000
 }
 
-func buildShowDB() {
+func loadShowDB() {
 	res, err := ioutil.ReadFile("shows.txt");
 	check(err)
-	
-	db := strings.Split(string(res[:]), "\r\n\r\n")
+
+	db := strings.Split(string(res[:]), fmt.Sprintf("%s%s", config["newline"], config["newline"]))
+
 	shows = make([][]string, len(db))
 	
 	for i, chunk := range db {
-		parts := strings.Split(chunk, "\r\n")
+		parts := strings.Split(chunk, config["newline"])
 		shows[i] = []string{parts[0], parts[1], parts[2], parts[3]}
 	}
 }

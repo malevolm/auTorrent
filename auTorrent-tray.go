@@ -175,15 +175,15 @@ func stringInSlice(a string, list []string) bool {
 
 func httpGet(url string) string {
 	res, err := http.Get(url)
-	check(err)
-	
-	result, err := ioutil.ReadAll(res.Body)
-	res.Body.Close()
-	check(err)
-	
-	out := string(result[:])
-	
-	return out
+	if err == nil {
+		result, err := ioutil.ReadAll(res.Body)
+		res.Body.Close()
+		if err != nil {
+			return ""
+		}
+		return string(result[:])
+	}
+	return ""
 }
 
 func getSysInfo() {

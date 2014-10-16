@@ -2,7 +2,14 @@ auTorrent 0.1.0
 =========
 a minimal torrent autodownloader for tv shows. meant to be used with a torrent client which watches a directory for new torrents, such as uTorrent
 
-auTorrent is written to be platform independent, however you must make sure your shows.txt and config.txt contain the right type of newline for your system. on windows you must use CR+LF, on everything else its just LF. the files in this repo are CR+LF by default
+about
+==========
+* desired tv shows are specified via shows.txt
+* sleep settings & save path for torrents in config.txt
+* download.log tracks your progression through tv series', deleting it will lead to duplicates unless you also update your shows.txt
+* only supported torrent search is thepiratebay.se, should suffice for 99% of tv shows
+* changes in shows.txt and config.txt are reflected upon next iteration (no need to restart app)
+* the files in this repo are CR+LF by default, you should make your own as to match your OS
 
 auTorrent-tray
 ==============
@@ -11,14 +18,6 @@ auTorrent-tray
 * if building auTorrent-tray, use the following command
  
 > go build -ldflags -H=windowsgui auTorrent-tray.go
-
-about
-==========
-* desired tv shows are specified via shows.txt
-* sleep settings & save path for torrents in config.txt
-* download.log tracks your progression through tv series', deleting it will lead to duplicates unless you also update your shows.txt
-* only supported torrent search is thepiratebay.se, should suffice for 99% of tv shows
-* changes in shows.txt and config.txt are reflected upon next iteration (no need to restart app)
 
 shows.txt
 =========

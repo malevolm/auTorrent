@@ -120,12 +120,11 @@ func getSeasonInfo(torrent string, expr string) []string {
 	return []string{rs[0][1], rs[0][2]}
 }
 
-func downloadTorrent(torrent_info []string) int {
+func downloadTorrent(torrent_info []string) {
 	file := fmt.Sprintf("%s%s.torrent", config["SAVE_PATH"], torrent_info[3])
 	link := fmt.Sprintf("http://torrents.thepiratebay.se/%s/%s.torrent", torrent_info[2], torrent_info[3])
 	data := httpGet(link)
 	ioutil.WriteFile(file, []byte(data), 0600)
-	return 1
 }
 
 func checkIfDownloaded(show string, season string, episode string) bool {

@@ -37,14 +37,11 @@ func main() {
 
 	go func() {
 		getSysInfo()
-		fmt.Println("==auTorrent Initialised==")
-		
+
 		for {
 			loadConfig()
-			loadShowDB()
-			
+			loadShowDB()		
 			checkForNewTorrents()
-			fmt.Printf("(sleeping for %v)\n", sleep)
 			time.Sleep(sleep)
 		}
 	
@@ -63,14 +60,12 @@ func main() {
 
 func checkForNewTorrents() {
 	for _, show := range shows {
-		fmt.Printf("Searching for new episodes of \"%s\"\n", show[0])
 		res := torrentSearch(show[0]);
 		for i := 0; i < len(res); i++ {
 			result := checkTorrentSuitability(res[i][0], res[i][1])
 			if result == 1 {
 				info := getSeasonInfo(res[i][0], show[1])
 				if checkIfDownloaded(show[0], info[0], info[1]) == false {
-					fmt.Printf("=> %s (by %s)\n", res[i][0], res[i][1])
 					downloadTorrent(res[i])
 					markAsDownloaded(show[0], info[0], info[1])
 				}

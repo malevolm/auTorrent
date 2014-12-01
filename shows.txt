@@ -1,13 +1,3 @@
-The Colbert Report
-(?i)The.Colbert.Report.2014.(\d+).(\d+)
-10 8
-Drarbg eztv ettv
-
-Conan
-(?i)Conan.2014.(\d+).(\d+)
-10 2
-Drarbg eztv ettv
-
 Family Guy
 (?i)Family.Guy.S(\d+)E(\d+).+?720p
 13 2
@@ -38,7 +28,32 @@ Homeland
 4 2
 Drarbg eztv ettv
 
+Mythbusters
+(?i)Mythbusters.S(\d+)E(\d+).+?720p
+14 6
+Drarbg eztv ettv
+
 Key and Peele
-(?i)Key.and.Peele.S(\d+)E(\d+).+?720p
+(?i)Key.and.Peele.S(\d+)E(\d+)
 4 2
+Drarbg eztv ettv
+
+Anthony Bourdain Parts Unknown
+(?i)Anthony.Bourdain.Parts.Unknown.S(\d+)E(\d+).+?720p
+4 1
+Drarbg eztv ettv
+
+Somebodys Gotta Do It
+(?i)Somebodys.Gotta.Do.It.S(\d+)E(\d+).+?720p
+1 0
+Drarbg eztv ettv TvTeam brasse0
+
+Jeopardy
+(?i)Jeopardy..S20(\d+)E(\d+)
+14 170
+vader85
+
+The Colbert Report
+(?i)The.Colbert.Report.2014.(\d+).(\d+)
+10 8
 Drarbg eztv ettv

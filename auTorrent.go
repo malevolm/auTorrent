@@ -2,7 +2,6 @@ package main
 
 import (
 	"os"
-//  "io"
 	"fmt"
 	"time"
 	"regexp"

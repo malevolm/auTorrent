@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+//  "io"
 	"fmt"
 	"time"
 	"regexp"
@@ -63,7 +64,7 @@ func torrentSearch(query string) [][]string {
 	rr := re.FindAllStringSubmatch(src, -1)
 	
 	out := make([][]string, len(rr))
-	
+  
 	for i := 0; i < len(rr); i++ {
 		out[i] = []string{rr[i][3], rr[i][4], rr[i][1], rr[i][2]}
 	}
@@ -103,9 +104,24 @@ func getSeasonInfo(torrent string, expr string) []string {
 
 func downloadTorrent(torrent_info []string) {
 	file := fmt.Sprintf("%s%s.torrent", config["SAVE_PATH"], torrent_info[3])
-	link := fmt.Sprintf("http://torrents.thepiratebay.se/%s/%s.torrent", torrent_info[2], torrent_info[3])
-	data := httpGet(link)
-	ioutil.WriteFile(file, []byte(data), 0600)
+	link := fmt.Sprintf("https://thepiratebay.se/torrent/%s/%s", torrent_info[2], torrent_info[3])
+  data := httpGet(link)
+  
+  re := regexp.MustCompile("icon-magnet.gif'\\);\" href=\"(.+?)\"")
+  rr := re.FindAllStringSubmatch(data, -1)
+  
+  if len(rr) > 0 {
+    form := url.Values{}
+    form.Add("magnet", rr[0][1])
+    data := httpPost("http://magnet2torrent.com/upload/", form)
+    re := regexp.MustCompile("Your <a href=\"(.+?)\"")
+    rr := re.FindAllStringSubmatch(data, -1)
+    if len(rr) > 0 {
+      fmt.Println(rr[0][1])
+      data := httpGet(rr[0][1])
+      ioutil.WriteFile(file, []byte(data), 0600)
+    }
+  }
 }
 
 func checkIfDownloaded(show string, season string, episode string) bool {
@@ -146,6 +162,19 @@ func stringInSlice(a string, list []string) bool {
         }
     }
     return false
+}
+
+func httpPost(url string, body url.Values) string {
+	res, err := http.PostForm(url, body)
+	if err == nil {
+		result, err := ioutil.ReadAll(res.Body)
+		res.Body.Close()
+		if err != nil {
+			return ""
+		}
+		return string(result[:])
+	}
+	return ""
 }
 
 func httpGet(url string) string {
